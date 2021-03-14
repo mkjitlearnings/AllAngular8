@@ -1,0 +1,26 @@
+<div style="background-color: blanchedalmond;">
+<p>user-comp works!</p>
+<form>
+ Enter Username <input type="text" #username/><br/>
+ Enter Password <input type="text" #password/><br/>
+ <button (click)="checkUserLogin(username.value,password.value)">
+     login</button>
+
+</form>
+</div>
+
+==========================================================================
+Inside the Component.ts file
+
+export class UserCompComponent implements OnInit {
+
+  constructor() { }
+
+  ngOnInit(): void {
+  }
+
+  checkUserLogin(usernameValue:string,passwordValue:string)
+  {
+    alert(usernameValue+" "+passwordValue);
+  }
+}
