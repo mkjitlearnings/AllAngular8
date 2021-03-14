@@ -1,0 +1,43 @@
+<h1>Hello World</h1>
+{{title}}<br/>
+{{getTitle()}} <br/>
+{{student.name}} {{student.marks}} <br/>
+{{arr[0]}}<br/>
+
+{{1*891}}
+
+<hr/>
+
+<div>
+  <button (click)="getTitle"> My Button </button>
+  <br/><input type="text" value="{{student.name}}"/>
+  <br/>
+   <input [disabled]="status" type="text" value="{{title}}"/>
+   
+   import { Component } from '@angular/core';
+============================================================================================================
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.less']
+})
+export class AppComponent {
+  title = 'MKJ App';
+  status = true;
+  
+  getTitle()
+  {
+    return this.title+" My Angular";
+  }
+
+  student = {
+    name : "rakesh",
+    age : 20,
+    marks : 858
+  }
+
+  arr = ['java','angular','react'];
+   
+  
+
+}
