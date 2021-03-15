@@ -1,0 +1,16 @@
+<div [ngSwitch]="status">
+    <div *ngSwitchCase='true' style="background-color: greenyellow;">Status is true</div>
+    <div *ngSwitchCase='false' style="background-color: lightsalmon;">Status is false</div>
+    
+</div>
+
+
+export class LoginComponent implements OnInit {
+
+  status = false;
+  constructor() { }
+
+  ngOnInit(): void {
+  }
+
+}
