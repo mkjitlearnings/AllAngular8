@@ -1,0 +1,124 @@
+<table>
+    <tr>
+        <td>
+            <app-header></app-header>
+        </td>
+    </tr>
+    <tr>
+        <td> <app-leftpanel></app-leftpanel></td>
+        <td> {{mainPanel}}</td>
+        <td>
+            Stock Name {{stock.companyName}}
+            Stock Price {{stock.marketPrice}}
+            Valuation {{stock.vwamp > stock.marketPrice ? "Fair-Valued":"Over-valued"}}
+            Stock Holding {{stock.holding}}
+        </td>
+    </tr>
+</table>
+<hr/>
+
+1 <input type="text" value="{{indices}}"/> <br/>
+2 <input type="text" [disabled]="isDisabled" [value]="indices"/>
+
+<hr/>
+
+Enter the New Stock Price <input type="text" #stockPrice/>
+<button (click)='setNewPrice(stockPrice.value)'>Set New Stock Price </button>
+
+<div *ngIf="stock.vwamp > stock.marketPrice ;then faircost else highCost">
+</div>
+<ng-template #faircost>
+    <div>
+        Valuation {{stock.vwamp > stock.marketPrice ? "Fair-Valued":"Over-valued"}}
+        <button (click)="buyStock()">Buy Stock</button>                  <!--  when this is click holding status will change >
+    </div>
+</ng-template>
+
+
+<ng-template #highCost>
+    <div>
+        Stock if Over Priced 
+    </div>
+</ng-template>
+
+<hr/>
+<table *ngFor="let share of getAllStocks()">
+    <tr>
+        <td style="color: mediumvioletred;">{{share.marketPrice}}</td>
+        <td style="color: mediumvioletred;">{{share.companyName}}</td>
+        
+        
+    </tr>
+</table>
+
+===============================================================================================================================================
+
+
+import { Component } from "@angular/core";
+
+
+interface StockDetails
+{
+        marketPrice:number,
+        companyName:string,
+        indices:string,
+        vwamp:number,
+        holding:boolean
+}
+
+@Component({
+    selector:'base-tag',
+    templateUrl:'./base.component.html',
+    styleUrls:['./base.component.css']
+})
+export class BaseComponent
+{
+    mainPanel:string="Main Panel";
+    
+    indices:string = "Nifty-50";
+    isDisabled : boolean = false; // after business processing 
+
+    stock:StockDetails = {
+        marketPrice:3000,
+        companyName:"ABC-Tech",
+        indices:"nifty-50",
+        vwamp:2500,
+        holding:false
+    }
+
+    buyStock()
+    {
+        this.stock.holding = true;
+    }
+    
+    setNewPrice(newPrice:string)
+    {
+        let newstockprice:number = parseInt(newPrice);
+        this.stock.marketPrice = newstockprice;
+    }
+
+    //---------------- for loop Demo ---------------
+
+    getAllStocks():StockDetails[]
+    {
+        let stock1:StockDetails = {
+            marketPrice:3000,
+            companyName:"ABC-Tech",
+            indices:"nifty-50",
+            vwamp:2500,
+            holding:false
+        }
+        let stock2:StockDetails = {
+            marketPrice:3000,
+            companyName:"ABC-Tech",
+            indices:"nifty-50",
+            vwamp:2500,
+            holding:false
+        }
+        
+        return [stock1,stock2];
+    }
+
+
+}
+
