@@ -1,0 +1,40 @@
+<tr *ngFor="let stock of getAllStocks()" [style]="stock.isRecommended?greenClass:normalClass">
+
+                <td>  {{stock.companyName}}  </td>
+                <td> {{stock.stockPrice|currency:"INR":"symbol"}} </td>
+                <td> {{stock.vwap|currency:"INR":"symbol"}} </td>
+                <td>  {{(stock.stockPrice < stock.vwap) ?"Fair-Price":"Over-Priced"}}</td>
+                <td>  {{stock.holding}}</td>
+        </tr>
+        ===============================
+        import { Component, OnInit } from '@angular/core';
+
+interface StockDetails{
+  companyName : string,
+  stockPrice:number,
+  vwap:number,
+  holding:false,
+  isRecommended:boolean
+};
+
+
+export class RightpanelComponent implements OnInit {
+
+  greenClass:string = "color:LawnGreen";
+  normalClass:string = "color:black";
+  
+
+  getAllStocks():StockDetails[]
+  {
+    let stock1:StockDetails = {companyName : "HDFC",stockPrice:1400,vwap:1341,holding:false,isRecommended:false};
+    let stock2:StockDetails = {companyName : "ICICI",stockPrice:650,vwap:661,holding:false,isRecommended:true};
+    let stock3:StockDetails = {companyName : "Infosys",stockPrice:1410,vwap:1390,holding:false,isRecommended:false};
+    let stock4:StockDetails = {companyName : "TCS",stockPrice:3200,vwap:3341,holding:false,isRecommended:true};
+  
+    let stocks:StockDetails[] = [stock1,stock2,stock3,stock4];
+
+    return stocks;
+  }
+
+
+}//end class
